@@ -7214,3 +7214,343 @@ button,
 .breadcrumbs li {
   font-family: 'DM Sans', sans-serif !important;
 }
+/* ==========================================================================
+   BRANDTRACK — FOOTER WORDMARK
+   ========================================================================== */
+
+.bt-footer-wordmark {
+  width: 100%;
+  position: relative;
+  background: #000;
+  padding: 56px 0 40px;
+  overflow: hidden;
+}
+
+.bt-footer-wordmark__inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bt-footer-wordmark__img {
+  display: block;
+  width: min(1400px, 110vw);
+  max-width: none;
+  opacity: 0.75;
+  filter: brightness(1.1) contrast(1.1);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+/* ==========================================================================
+   BRANDTRACK — MOBILE RESPONSIVE
+   Breakpoints: 768px (tablet/phone) y 480px (phone pequeno)
+   ========================================================================== */
+
+/* ── GLOBAL 768px ── */
+@media (max-width: 768px) {
+
+  /* Container padding */
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Sub-nav: breadcrumbs y buscador en columna */
+  .sub-nav {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    padding: 12px 0 !important;
+  }
+
+  .search-container {
+    width: 100% !important;
+  }
+
+  .search-container .search,
+  .search-container .search-full {
+    width: 100% !important;
+  }
+
+  /* Prevent iOS zoom on input focus */
+  input[type="search"],
+  input[type="text"],
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    padding: 10px 16px !important;
+  }
+
+  .logo img {
+    max-height: 30px !important;
+  }
+
+  /* ── ARTICLE PAGE ── */
+  .article-container {
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  .article-sidebar {
+    order: -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    position: static !important;
+    flex: none !important;
+    margin-bottom: 20px !important;
+  }
+
+  .article {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    border-left: none !important;
+    margin-left: 0 !important;
+  }
+
+  .article-title,
+  .bt-gradient-text {
+    font-size: 26px !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  .article-header {
+    padding-bottom: 20px !important;
+  }
+
+  .article-author {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .article-votes-controls {
+    gap: 10px !important;
+  }
+
+  .article-vote {
+    min-height: 44px !important;
+    padding: 10px 18px !important;
+  }
+
+  .article-return-to-top {
+    display: none !important;
+  }
+
+  /* Comments */
+  .comment-wrapper {
+    gap: 12px !important;
+  }
+
+  .comment-form,
+  .bt-form {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .comment-avatar {
+    display: none !important;
+  }
+
+  .comment-container {
+    width: 100% !important;
+  }
+
+  /* ── CATEGORY PAGE ── */
+  .bt-category-layout {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  .bt-category-sidebar {
+    position: static !important;
+    flex: none !important;
+    width: 100% !important;
+    min-height: auto !important;
+  }
+
+  .bt-category-sidebar-inner {
+    position: relative !important;
+    padding: 28px 24px !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    min-height: auto !important;
+    border-radius: 20px !important;
+  }
+
+  .bt-category-sidebar .bt-cat-icon {
+    width: 52px !important;
+    height: 52px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .bt-category-sidebar-title {
+    font-size: 28px !important;
+  }
+
+  .bt-category-main {
+    width: 100% !important;
+  }
+
+  .bt-section-list {
+    gap: 16px !important;
+  }
+
+  .bt-category-card {
+    padding: 20px !important;
+    border-radius: 16px !important;
+  }
+
+  .bt-card-title a {
+    font-size: 17px !important;
+  }
+
+  /* ── SECTION PAGE ── */
+  .bt-grand-card {
+    padding: 20px 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .bt-pill-link,
+  .bt-article-pill,
+  .sidenav-item,
+  .bt-sidenav-item {
+    padding: 12px 16px !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* ── SEARCH RESULTS PAGE ── */
+  .search-results-filters,
+  .search-results-sidebar {
+    display: none !important;
+  }
+
+  .search-results-column,
+  .search-results .search-results-column {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 12px 0 !important;
+  }
+
+  /* ── FOOTER ── */
+  .footer-inner {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: center !important;
+    padding: 20px 16px !important;
+  }
+
+  .bt-footer-wordmark {
+    padding: 32px 0 24px !important;
+  }
+
+  .bt-footer-wordmark__img {
+    width: 200vw !important;
+  }
+
+  /* ── TOUCH TARGETS ── */
+  .breadcrumbs a {
+    min-height: 36px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  .menu-list-mobile .item a {
+    min-height: 44px !important;
+  }
+
+  .dropdown-menu a,
+  .dropdown-menu [role="menuitem"] {
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* ── PROFILE PAGE ── */
+  .bt-profile-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+  }
+
+  .bt-profile-options {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .bt-profile-options .button {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+}
+
+/* ── PHONE 480px ── */
+@media (max-width: 480px) {
+
+  /* Fonts */
+  .article-title,
+  .bt-gradient-text {
+    font-size: 22px !important;
+  }
+
+  .bt-category-sidebar-title {
+    font-size: 22px !important;
+  }
+
+  .bt-category-sidebar-inner {
+    padding: 24px 18px !important;
+  }
+
+  /* Badges grid: 1 column */
+  .bt-badges-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Profile nav tabs: horizontally scrollable */
+  .bt-nav-list {
+    overflow-x: auto !important;
+    gap: 20px !important;
+    flex-wrap: nowrap !important;
+    padding-bottom: 6px !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Footer wordmark more zoomed on small phones */
+  .bt-footer-wordmark__img {
+    width: 280vw !important;
+  }
+
+  /* WhatsApp float button: adjust */
+  .bt-wa-float {
+    right: 12px !important;
+    bottom: 12px !important;
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  /* Article related/recent: single column */
+  .article-relatives .articles-list,
+  .bt-relatives .articles-list {
+    flex-direction: column !important;
+  }
+
+  /* Collapsible sidebar: always show toggle */
+  .collapsible-sidebar-toggle {
+    display: flex !important;
+    min-height: 44px !important;
+    width: 100% !important;
+  }
+
+}
