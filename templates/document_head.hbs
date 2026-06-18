@@ -1,0 +1,574 @@
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<!-- Make the translated search clear button label available for use in JS -->
+<!-- See buildClearSearchButton() in script.js -->
+<script type="text/javascript">window.searchClearButtonLabelLocalized = "{{t 'search_clear'}}";</script>
+<script type="text/javascript">
+  // Load ES module polyfill only for browsers that don't support ES modules
+  if (!(HTMLScriptElement.supports && HTMLScriptElement.supports('importmap'))) {
+    document.write('<script async src="{{asset 'es-module-shims.js'}}"><\/script>');
+  }
+</script>
+
+<script type="importmap">
+{
+  "imports": {
+    "new-request-form": "{{asset 'new-request-form-bundle.js'}}",
+    "request-list": "{{asset 'request-list-bundle.js'}}",
+    "flash-notifications": "{{asset 'flash-notifications-bundle.js'}}",
+    "service-catalog": "{{asset 'service-catalog-bundle.js'}}",
+    "approval-requests": "{{asset 'approval-requests-bundle.js'}}",
+    "approval-requests-translations": "{{asset 'approval-requests-translations-bundle.js'}}",
+    "new-request-form-translations": "{{asset 'new-request-form-translations-bundle.js'}}",
+    "request-list-translations": "{{asset 'request-list-translations-bundle.js'}}",
+    "service-catalog-translations": "{{asset 'service-catalog-translations-bundle.js'}}",
+    "shared": "{{asset 'shared-bundle.js'}}",
+    "ticket-fields": "{{asset 'ticket-fields-bundle.js'}}",
+    "wysiwyg": "{{asset 'wysiwyg-bundle.js'}}"
+  }
+}
+</script>
+
+<script type="module">
+  import { renderFlashNotifications } from "flash-notifications";
+
+  const settings = {{json settings}};
+  const baseLocale = {{json help_center.base_locale}};
+
+  renderFlashNotifications(settings, baseLocale);
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* ==========================================================
+   BRANDTRACK HELP CENTER — HOME PAGE
+   Full-viewport two-column layout (mockup v2)
+   ========================================================== */
+
+/* ── BASE ── */
+html, body {
+  background: #000;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ── HOME PAGE: full-viewport, hide header/footer ── */
+body.template-home_page {
+  overflow: hidden;
+}
+
+body.template-home_page .header,
+body.template-home_page header,
+body.template-home_page .footer,
+body.template-home_page footer {
+  display: none !important;
+}
+
+body.template-home_page .main-content,
+body.template-home_page #main-content-outer,
+body.template-home_page .main-content > .container {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+/* ── MAIN GRID ── */
+.bt-main {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  height: 100vh;
+}
+
+/* ── LEFT PANEL ── */
+.bt-left {
+  background: linear-gradient(160deg, #2d1a6b 0%, #1a0e3e 55%, #000 100%);
+  padding: 52px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+.bt-left::-webkit-scrollbar { display: none; }
+
+/* Language toggle */
+.bt-lang-toggle {
+  display: flex;
+  align-self: flex-start;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  padding: 4px;
+  gap: 2px;
+}
+.bt-lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+  line-height: 1;
+}
+.bt-lang-btn.active {
+  background: #7455FD;
+  color: #fff;
+}
+.bt-lang-btn:hover:not(.active) {
+  color: #fff;
+}
+
+/* Title */
+.bt-title {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+}
+
+/* Search box */
+.bt-search-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.bt-search-wrap .search,
+.bt-search-wrap .search-full {
+  display: flex !important;
+  align-items: center !important;
+  background: rgba(255,255,255,0.07) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  border-radius: 999px !important;
+  padding: 14px 20px !important;
+  transition: border-color 0.2s !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  gap: 10px !important;
+}
+
+.bt-search-wrap .search:focus-within,
+.bt-search-wrap .search-full:focus-within {
+  border-color: rgba(116,85,253,0.7) !important;
+}
+
+.bt-search-wrap input[type="search"],
+.bt-search-wrap input[type="text"] {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 15px !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+}
+
+.bt-search-wrap input::placeholder {
+  color: rgba(255,255,255,0.35) !important;
+}
+
+/* Submit button hidden (submit=false) */
+.bt-search-wrap .search-full button[type="submit"],
+.bt-search-wrap .search button[type="submit"] {
+  display: none !important;
+}
+
+/* Clear button */
+.bt-search-wrap .clear-button,
+.bt-search-wrap button[aria-label*="clear"],
+.bt-search-wrap button[aria-label*="Clear"],
+.bt-search-wrap button[aria-label*="limpiar"],
+.bt-search-wrap button[aria-label*="Limpiar"] {
+  background: rgba(255,255,255,0.15) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  color: #fff !important;
+  width: 28px !important;
+  height: 28px !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+}
+
+/* Autocomplete/instant search dropdown */
+.bt-search-wrap [role="listbox"],
+.bt-search-wrap .autocomplete-suggestions,
+.bt-search-wrap [class*="suggestion"] {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  background: #0b0b0f !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.55) !important;
+}
+
+/* Popular label */
+.bt-popular-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+/* Tags */
+.bt-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bt-tag {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 13px 16px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.bt-tag:hover {
+  background: rgba(116,85,253,0.15);
+  border-color: rgba(116,85,253,0.45);
+  color: #fff;
+}
+
+/* ── RIGHT PANEL ── */
+.bt-right {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 100vh;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  overflow-y: auto;
+}
+
+/* ── CATEGORY CARDS ── */
+.bt-cat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.2s;
+  padding: 24px;
+  min-height: calc(100vh / 3);
+}
+
+/* Remove double borders — last column & last row */
+.bt-cat-card:nth-child(3n)   { border-right: none; }
+.bt-cat-card:nth-child(n+7)  { border-bottom: none; }
+
+.bt-cat-card:hover {
+  background: rgba(116,85,253,0.08);
+}
+
+/* Icon */
+.bt-cat-icon {
+  display: block;
+  width: 44px;
+  height: 44px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  flex-shrink: 0;
+  transition: filter 0.25s;
+}
+.bt-cat-card:hover .bt-cat-icon {
+  filter: brightness(1.3);
+}
+
+/* Name */
+.bt-cat-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  line-height: 1.3;
+  transition: color 0.25s;
+  font-family: 'Space Grotesk', sans-serif;
+  max-width: 180px;
+}
+.bt-cat-card:hover .bt-cat-name {
+  color: #fff;
+}
+
+/* ── ICON MAPPING (nth-child = Zendesk category order) ── */
+.bt-right .bt-cat-card:nth-child(1)  .bt-cat-icon { background-image: url({{asset 'PRIMEROS-PASOS.svg'}}); }
+.bt-right .bt-cat-card:nth-child(2)  .bt-cat-icon { background-image: url({{asset 'CUENTAS.svg'}}); }
+.bt-right .bt-cat-card:nth-child(3)  .bt-cat-icon { background-image: url({{asset 'APP.svg'}}); }
+.bt-right .bt-cat-card:nth-child(4)  .bt-cat-icon { background-image: url({{asset 'BRANDTRACK-BOX.svg'}}); }
+.bt-right .bt-cat-card:nth-child(5)  .bt-cat-icon { background-image: url({{asset 'MUSICA.svg'}}); }
+.bt-right .bt-cat-card:nth-child(6)  .bt-cat-icon { background-image: url({{asset 'anuncios.svg'}}); }
+.bt-right .bt-cat-card:nth-child(7)  .bt-cat-icon { background-image: url({{asset 'SIGNAGE.svg'}}); }
+.bt-right .bt-cat-card:nth-child(8)  .bt-cat-icon { background-image: url({{asset 'TECNICOS.svg'}}); }
+.bt-right .bt-cat-card:nth-child(9)  .bt-cat-icon { background-image: url({{asset 'PLANS.svg'}}); }
+.bt-right .bt-cat-card:nth-child(10) .bt-cat-icon { background-image: url({{asset 'LICENCIAS.svg'}}); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  body.template-home_page { overflow: auto; }
+
+  .bt-main {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .bt-left { padding: 40px 24px; }
+  .bt-title { font-size: 36px; }
+
+  .bt-right {
+    height: auto;
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .bt-cat-card {
+    min-height: 140px;
+  }
+  /* Reset border rules for 2-col on mobile */
+  .bt-cat-card:nth-child(3n)  { border-right: 1px solid rgba(255,255,255,0.08); }
+  .bt-cat-card:nth-child(n+7) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+}
+
+@media (max-width: 520px) {
+  .bt-right { grid-template-columns: repeat(2, 1fr); }
+
+  .bt-cat-card:nth-child(3n)  { border-right: 1px solid rgba(255,255,255,0.08); }
+  .bt-cat-card:nth-child(2n)  { border-right: none; }
+  .bt-cat-card:nth-child(n+7) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+}
+
+
+/* ==========================================================
+   SEARCH DROPDOWN — DARK MODE (all pages)
+   ========================================================== */
+
+:root {
+  --bt-dd-bg:     #0b0b0f;
+  --bt-dd-bg2:    #141420;
+  --bt-dd-border: rgba(255,255,255,.14);
+  --bt-dd-text:   rgba(255,255,255,.92);
+  --bt-dd-muted:  rgba(255,255,255,.62);
+  --bt-dd-violet: #7455FD;
+}
+
+html body [class*="searchbox-suggest"],
+html body [class*="searchboxSuggest"],
+html body [class*="instant-search"],
+html body [class*="instantSearch"],
+html body [class*="search-results"],
+html body [class*="searchResults"],
+html body [class*="autocomplete"],
+html body [class*="auto-complete"],
+html body [class*="suggestion"],
+html body [class*="suggestions"],
+html body [role="listbox"],
+html body [data-search-results],
+html body [data-suggestions] {
+  background: var(--bt-dd-bg) !important;
+  border: 1px solid var(--bt-dd-border) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,.55) !important;
+  color: var(--bt-dd-text) !important;
+}
+
+html body [class*="searchbox-suggest"] *,
+html body [class*="instant-search"] *,
+html body [class*="search-results"] *,
+html body [class*="autocomplete"] *,
+html body [class*="suggestions"] *,
+html body [data-search-results] * {
+  color: var(--bt-dd-text) !important;
+}
+
+html body [class*="searchbox-suggest"] li,
+html body [class*="instant-search"] li,
+html body [class*="search-results"] li,
+html body [class*="autocomplete"] li,
+html body [class*="suggestion"],
+html body [role="option"] {
+  background: transparent !important;
+  border-top: 1px solid var(--bt-dd-border) !important;
+}
+
+html body [class*="searchbox-suggest"] li:hover,
+html body [class*="instant-search"] li:hover,
+html body [class*="search-results"] li:hover,
+html body [class*="autocomplete"] li:hover,
+html body [class*="suggestion"]:hover,
+html body [role="option"]:hover,
+html body [aria-selected="true"] {
+  background: var(--bt-dd-bg2) !important;
+}
+
+html body [class*="searchbox-suggest"] a,
+html body [class*="instant-search"] a,
+html body [class*="search-results"] a,
+html body [class*="autocomplete"] a,
+html body [class*="suggestion"] a {
+  color: var(--bt-dd-violet) !important;
+  text-decoration: none !important;
+}
+
+html body [class*="searchbox-suggest"] mark,
+html body [class*="instant-search"] mark,
+html body [class*="search-results"] mark,
+html body [class*="autocomplete"] mark,
+html body [class*="searchbox-suggest"] strong,
+html body [class*="instant-search"] strong,
+html body [class*="search-results"] strong {
+  color: var(--bt-dd-violet) !important;
+  background: transparent !important;
+  font-weight: 700 !important;
+}
+
+html body [class*="breadcrumb"],
+html body [class*="search-result-breadcrumb"],
+html body [class*="searchResultBreadcrumb"],
+html body [class*="search-result-meta"],
+html body [class*="searchResultMeta"] {
+  display: none !important;
+}
+
+.search-full [role="combobox"] ~ *,
+.search-full [aria-expanded] ~ * {
+  background: #0b0b0f !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+}
+
+
+/* ==========================================================
+   SEARCH RESULTS PAGE
+   ========================================================== */
+
+body[class*="search"] main,
+body[class*="search"] .container,
+body[class*="search"] .container-divider,
+body[class*="search"] .search-results {
+  background: #000 !important;
+}
+
+.search-results-sidebar,
+.search-results-column + .search-results-sidebar {
+  display: none !important;
+}
+
+.search-results-column,
+.search-results .search-results-column {
+  width: 100% !important;
+  max-width: 980px;
+  margin: 0 auto !important;
+  padding: 28px 18px 60px !important;
+}
+
+.search-results-column h1,
+.search-results-column h2,
+.search-results-column .search-results-subheading {
+  color: #fff !important;
+}
+
+.search-results-list,
+.search-results-column ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 16px 0 0 !important;
+}
+
+.search-result,
+.search-results-list li {
+  padding: 14px 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 0 !important;
+}
+
+.search-result:last-child,
+.search-results-list li:last-child {
+  border-bottom: 0 !important;
+}
+
+.search-result a,
+.search-result-title a,
+.search-results-list a {
+  color: #7455FD !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+
+.search-result a:hover,
+.search-result-title a:hover,
+.search-results-list a:hover {
+  text-decoration: underline !important;
+}
+
+.search-result-description,
+.search-result-snippet,
+.search-results-list p,
+.search-results-list span {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+.search-result-breadcrumbs,
+.search-result-breadcrumbs a {
+  color: rgba(255,255,255,0.45) !important;
+  text-decoration: none !important;
+}
+
+.search-results input[type="search"],
+.search-results input[type="text"],
+.search-results .search input {
+  background: rgba(255,255,255,0.08) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  border-radius: 999px !important;
+}
+
+.search-results input::placeholder {
+  color: rgba(255,255,255,0.55) !important;
+}
+
+.search-results .search-results-count,
+.search-results .search-results-heading,
+.search-results .search-results-subheading {
+  padding: 0 !important;
+  margin: 0 0 12px 0 !important;
+  color: rgba(255,255,255,0.9) !important;
+  font-weight: 700 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+</style>

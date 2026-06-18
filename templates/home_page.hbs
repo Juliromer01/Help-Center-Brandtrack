@@ -1,0 +1,58 @@
+<h1 class="visibility-hidden">{{ help_center.name }}</h1>
+
+<div class="bt-main">
+
+  <!-- LEFT PANEL -->
+  <aside class="bt-left" aria-label="Help Center search">
+
+    <div class="bt-lang-toggle">
+      <a href="/hc/change_locale/es"    class="bt-lang-btn{{#is help_center.locale 'es'}} active{{/is}}">ES</a>
+      <a href="/hc/change_locale/en-us" class="bt-lang-btn{{#is help_center.locale 'es'}}{{else}} active{{/is}}">EN</a>
+    </div>
+
+    <h2 class="bt-title">
+      {{#is help_center.locale 'es'}}¿Cómo podemos ayudarte?{{else}}How can we help you?{{/is}}
+    </h2>
+
+    <div class="bt-search-wrap">
+      {{search submit=false instant=settings.instant_search class='search search-full'}}
+    </div>
+
+    <p class="bt-popular-label">
+      {{#is help_center.locale 'es'}}Temas frecuentes{{else}}Popular topics{{/is}}
+    </p>
+
+    <div class="bt-tags">
+      {{#is help_center.locale 'es'}}
+        <a href="https://new-help.brandtrack.ai/hc/es/articles/38750270507287" class="bt-tag">¿Cómo registrarme en Brandtrack?</a>
+        <a href="https://new-help.brandtrack.ai/hc/es/articles/38755063963543" class="bt-tag">¿Cómo elegir una playlist según el tipo de negocio?</a>
+        <a href="https://new-help.brandtrack.ai/hc/es/articles/38756550296983" class="bt-tag">¿Qué es un schedule?</a>
+      {{else}}
+        <a href="https://new-help.brandtrack.ai/hc/en-us/articles/38750270507287" class="bt-tag">How do I sign up for Brandtrack?</a>
+        <a href="https://new-help.brandtrack.ai/hc/en-us/articles/38755063963543" class="bt-tag">How do I choose a playlist for my business?</a>
+        <a href="https://new-help.brandtrack.ai/hc/en-us/articles/38756550296983" class="bt-tag">What is a schedule?</a>
+      {{/is}}
+    </div>
+
+  </aside>
+
+  <!-- RIGHT PANEL — categories grid -->
+  <main class="bt-right" id="main-content">
+    {{#each categories}}
+      {{#if ../has_multiple_categories}}
+        <a href="{{url}}" class="bt-cat-card" data-cat-id="{{id}}">
+          <span class="bt-cat-icon" aria-hidden="true"></span>
+          <span class="bt-cat-name">{{name}}</span>
+        </a>
+      {{else}}
+        {{#each sections}}
+          <a href="{{url}}" class="bt-cat-card" data-cat-id="{{id}}">
+            <span class="bt-cat-icon" aria-hidden="true"></span>
+            <span class="bt-cat-name">{{name}}</span>
+          </a>
+        {{/each}}
+      {{/if}}
+    {{/each}}
+  </main>
+
+</div>
