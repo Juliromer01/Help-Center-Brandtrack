@@ -64,6 +64,51 @@
   }
 </style>
 
+<!-- Floating language toggle — fixed bottom-right, above WhatsApp button -->
+<div class="bt-float-lang">
+  <a href="/hc/es"    class="bt-float-lang-btn{{#is help_center.locale 'es'}} active{{/is}}">ES</a>
+  <a href="/hc/en-us" class="bt-float-lang-btn{{#is help_center.locale 'es'}}{{else}} active{{/is}}">EN</a>
+</div>
+
+<style>
+  .bt-float-lang {
+    position: fixed !important;
+    right: 22px !important;
+    bottom: 90px !important;
+    z-index: 999998 !important;
+    display: flex !important;
+    align-items: center !important;
+    background: #141414 !important;
+    border: 1px solid #262626 !important;
+    border-radius: 999px !important;
+    padding: 4px !important;
+    gap: 2px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+  }
+  .bt-float-lang-btn {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: rgba(255,255,255,0.45) !important;
+    text-decoration: none !important;
+    padding: 6px 12px !important;
+    border-radius: 999px !important;
+    transition: all 0.18s !important;
+    line-height: 1 !important;
+  }
+  .bt-float-lang-btn.active {
+    background: #7455FD !important;
+    color: #fff !important;
+  }
+  .bt-float-lang-btn:hover:not(.active) {
+    color: #fff !important;
+    background: rgba(255,255,255,0.07) !important;
+  }
+  @media (max-width: 480px) {
+    .bt-float-lang { right: 16px !important; bottom: 80px !important; }
+  }
+</style>
+
 <a
   class="bt-wa-float"
   href="https://api.whatsapp.com/send/?phone=15557052438&text&type=phone_number&app_absent=0"

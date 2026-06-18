@@ -5,10 +5,9 @@
   <!-- LEFT PANEL -->
   <aside class="bt-left" aria-label="Help Center search">
 
-    <div class="bt-lang-toggle">
-      <a href="/hc/es"    class="bt-lang-btn{{#is help_center.locale 'es'}} active{{/is}}">ES</a>
-      <a href="/hc/en-us" class="bt-lang-btn{{#is help_center.locale 'es'}}{{else}} active{{/is}}">EN</a>
-    </div>
+    <a href="{{help_center.url}}" class="bt-home-logo">
+      <img src="{{settings.logo}}" alt="{{help_center.name}}" class="bt-home-logo-img" />
+    </a>
 
     <h2 class="bt-title">
       {{#is help_center.locale 'es'}}¿Cómo podemos ayudarte?{{else}}How can we help you?{{/is}}
