@@ -291,7 +291,7 @@ body.template-home_page .main-content > .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 100vh;
-  border-left: 1px solid rgba(255,255,255,0.08);
+  border-left: 1px solid #262626;
   overflow-y: auto;
 }
 
@@ -301,15 +301,16 @@ body.template-home_page .main-content > .container {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 20px;
   cursor: pointer;
   text-decoration: none;
   color: #fff;
-  border-right: 1px solid rgba(255,255,255,0.08);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  transition: background 0.2s;
-  padding: 24px;
+  border-right: 1px solid #262626;
+  border-bottom: 1px solid #262626;
+  transition: background 0.25s, border-color 0.25s;
+  padding: 32px 24px;
   min-height: calc(100vh / 3);
+  position: relative;
 }
 
 /* Remove double borders — last column & last row */
@@ -317,34 +318,38 @@ body.template-home_page .main-content > .container {
 .bt-cat-card:nth-child(n+7)  { border-bottom: none; }
 
 .bt-cat-card:hover {
-  background: rgba(116,85,253,0.08);
+  background: rgba(116,85,253,0.09);
+  border-color: rgba(116,85,253,0.28);
+  z-index: 1;
 }
 
 /* Icon */
 .bt-cat-icon {
   display: block;
-  width: 44px;
-  height: 44px;
+  width: 64px;
+  height: 64px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   flex-shrink: 0;
-  transition: filter 0.25s;
+  transition: filter 0.3s, transform 0.3s;
 }
 .bt-cat-card:hover .bt-cat-icon {
-  filter: brightness(1.3);
+  filter: brightness(1.25) drop-shadow(0 0 10px rgba(116,85,253,0.55));
+  transform: scale(1.08);
 }
 
 /* Name */
 .bt-cat-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+  font-weight: 600;
+  color: #bfbfbf;
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.35;
   transition: color 0.25s;
   font-family: 'Space Grotesk', sans-serif;
-  max-width: 180px;
+  letter-spacing: -0.02em;
+  max-width: 160px;
 }
 .bt-cat-card:hover .bt-cat-name {
   color: #fff;
@@ -376,22 +381,39 @@ body.template-home_page .main-content > .container {
   .bt-right {
     height: auto;
     border-left: none;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid #262626;
+    grid-template-columns: repeat(2, 1fr);
   }
-  .bt-cat-card {
-    min-height: 140px;
-  }
-  /* Reset border rules for 2-col on mobile */
-  .bt-cat-card:nth-child(3n)  { border-right: 1px solid rgba(255,255,255,0.08); }
-  .bt-cat-card:nth-child(n+7) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .bt-cat-card { min-height: 150px; }
+
+  /* Re-wire borders for 2-col */
+  .bt-cat-card:nth-child(3n)  { border-right: 1px solid #262626; }
+  .bt-cat-card:nth-child(n+7) { border-bottom: 1px solid #262626; }
+  .bt-cat-card:nth-child(2n)  { border-right: none; }
+  .bt-cat-card:nth-child(n+9) { border-bottom: none; }
 }
 
-@media (max-width: 520px) {
-  .bt-right { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 768px) {
+  /* Single column — cards fill full width */
+  .bt-right { grid-template-columns: 1fr !important; }
 
-  .bt-cat-card:nth-child(3n)  { border-right: 1px solid rgba(255,255,255,0.08); }
-  .bt-cat-card:nth-child(2n)  { border-right: none; }
-  .bt-cat-card:nth-child(n+7) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .bt-cat-card {
+    min-height: 96px !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    padding: 20px 28px !important;
+    gap: 20px !important;
+    border-right: none !important;
+    border-bottom: 1px solid #262626 !important;
+  }
+  .bt-cat-card:last-child { border-bottom: none !important; }
+  /* Override all nth-child border rules */
+  .bt-cat-card:nth-child(n)   { border-right: none !important; }
+  .bt-cat-card:nth-child(n+7) { border-bottom: 1px solid #262626 !important; }
+  .bt-cat-card:last-child { border-bottom: none !important; }
+
+  .bt-cat-icon { width: 44px !important; height: 44px !important; flex-shrink: 0; }
+  .bt-cat-name { text-align: left !important; max-width: none !important; font-size: 15px !important; }
 }
 
 
