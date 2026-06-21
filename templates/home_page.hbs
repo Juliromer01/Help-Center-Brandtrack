@@ -43,13 +43,13 @@
   <main class="bt-right" id="main-content">
     {{#each categories}}
       {{#if ../has_multiple_categories}}
-        <a href="{{url}}" class="bt-cat-card" data-cat-id="{{id}}">
+        <a href="{{url}}" class="bt-cat-card" data-cat-id="{{id}}" data-cat-name="{{name}}">
           <span class="bt-cat-icon" aria-hidden="true"></span>
           <span class="bt-cat-name">{{name}}</span>
         </a>
       {{else}}
         {{#each sections}}
-          <a href="{{url}}" class="bt-cat-card" data-cat-id="{{id}}">
+          <a href="{{url}}" class="bt-cat-card" data-cat-id="{{id}}" data-cat-name="{{name}}">
             <span class="bt-cat-icon" aria-hidden="true"></span>
             <span class="bt-cat-name">{{name}}</span>
           </a>

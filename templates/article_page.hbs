@@ -142,18 +142,6 @@
             {{#if settings.show_article_sharing}}
               <div class="article-share">{{share}}</div>
             {{/if}}
-            {{#if settings.show_article_comments}}
-              {{#if comments}}
-                <a href="#article-comments" class="article-comment-count">
-                  <svg role="img" aria-labelledby="article-comments-title article-comments-desc" xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="article-comment-count-icon">
-                    <title id="article-comments-title">{{t 'go_to_comments'}}</title>
-                    <desc id="article-comments-desc">{{t 'comments_count' count=article.comment_count}}</desc>
-                    <path fill="none" stroke="currentColor" d="M1 .5h10c.3 0 .5.2.5.5v7c0 .3-.2.5-.5.5H6l-2.6 2.6c-.3.3-.9.1-.9-.4V8.5H1C.7 8.5.5 8.3.5 8V1C.5.7.7.5 1 .5z"/>
-                  </svg>
-                  <span aria-hidden="true">{{article.comment_count}}</span>
-                </a>
-              {{/if}}
-            {{/if}}
           </div>
           {{#with article}}
             <div class="article-votes bt-votes-container">
@@ -190,84 +178,6 @@
           {{/if}}
         </div>
         
-        {{#if settings.show_article_comments}}
-          <div class="article-comments" id="article-comments">
-            <section class="comments">
-              <header class="comment-overview">
-                <h2 class="comment-heading">
-                  {{t 'comments'}}
-                </h2>
-                <p class="comment-callout">{{t 'comments_count' count=article.comment_count}}</p>
-                {{#if comments}}
-                  <div class="dropdown comment-sorter">
-                    <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                      {{t 'sort_by'}}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon" aria-hidden="true">
-                        <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-                      </svg>
-                    </button>
-                    <span class="dropdown-menu" role="menu">
-                      {{#each comment_sorters}}
-                        <a aria-checked="{{selected}}" href="{{url}}" role="menuitemradio">{{name}}</a>
-                      {{/each}}
-                    </span>
-                  </div>
-                {{/if}}
-              </header>
-
-              <ul id="comments" class="comment-list bt-comment-list">
-                {{#each comments}}
-                  <li id="{{anchor}}" class="comment bt-comment-item">
-                    <div class="comment-wrapper">
-                      <div class="comment-info">
-                        <div class="comment-author">
-                          <div class="avatar comment-avatar">
-                            {{#if author.agent}}
-                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" aria-hidden="true" viewBox="0 0 12 12" class="icon-agent" aria-label="{{t 'team_member' name=author.name}}">
-                                <path fill="currentColor" d="M6 0C2.7 0 0 2.7 0 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm2.3 7H3.7c-.3 0-.4-.3-.3-.5C3.9 7.6 4.9 7 6 7s2.1.6 2.6 1.5c.1.2 0 .5-.3.5z"/>
-                              </svg>
-                            {{/if}}
-                            <img src="{{author.avatar_url}}" alt="" class="user-avatar"/>
-                          </div>
-                          <div class="comment-meta">
-                            <span title="{{author.name}}" id="{{anchor}}-author">
-                              {{#link 'user_profile' id=author.id}}
-                                {{author.name}}
-                              {{/link}}
-                            </span>
-                            <div class="meta-group meta-group-opposite">
-                              {{#if editor}}
-                                <span class="meta-data">{{date edited_at timeago=true}}</span>
-                                <span class="meta-data">{{t 'edited'}}</span>
-                              {{else}}
-                                <span class="meta-data">{{date created_at timeago=true}}</span>
-                              {{/if}}
-                            </div>
-                          </div>
-                        </div>
-                        <section class="comment-body" id="{{anchor}}-body">{{body}}</section>
-                      </div>
-                    </div>
-                  </li>
-                {{/each}}
-              </ul>
-
-              {{pagination}}
-
-              {{#form 'comment' class='comment-form hbs-form bt-form'}}
-                <div class="avatar comment-avatar">
-                  {{user_avatar class='user-avatar'}}
-                </div>
-                <div class="comment-container">
-                  {{wysiwyg 'body'}}
-                  <div class="comment-form-controls">
-                    {{input type='submit' class="button button-large bt-submit"}}
-                  </div>
-                </div>
-              {{/form}}
-            </section>
-          </div>
-        {{/if}}
       </article>
     </div>
   </div>
